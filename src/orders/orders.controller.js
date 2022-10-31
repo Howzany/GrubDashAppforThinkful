@@ -142,12 +142,12 @@ function deletePendingValidation(req, res, next) {
 }
 
 function create(req, res) {
-  const { data: { deliverTo, mobileNumber, status, dishes } = {} } = req.body;
+  const { data: { deliverTo, mobileNumber, dishes } = {} } = req.body;
   const newOrder = {
     id: nextId(),
     deliverTo,
     mobileNumber,
-    status,
+    status: "pending",
     dishes,
   };
   orders.push(newOrder);
@@ -191,10 +191,8 @@ module.exports = {
     //status
     propertyExistsNotDish("deliverTo"),
     propertyExistsNotDish("mobileNumber"),
-    propertyExistsNotDish("status"),
     validatePropertyNotDish("deliverTo"),
     validatePropertyNotDish("mobileNumber"),
-    validatePropertyNotDish("status"),
     validationDishes,
     dishQuantityValidation,
     create,
